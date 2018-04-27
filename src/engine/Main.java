@@ -8,11 +8,32 @@ import java.util.ArrayList;
 
 public class Main {
 
+	public static ArrayList<String> knowledgeBase;
+	public static ArrayList<String> symbols;
+	public static String query;
+
 	public static void main(String[] args) {
-		System.out.println(args[0] + " " + args[1]);
+		// init variabels
+		knowledgeBase = new ArrayList<String>();
+		symbols = new ArrayList<String>();
+		// Read File
 		readFile(args[1]);
+		// Get method from first String
+		String method = args[0];
+		Method thisMethod = null;
+
+		switch (method.toUpperCase()) {
+			case "TT":
+				thisMethod = new TruthTable(knowledgeBase, symbols, query);
+				break;
+			default:
+				System.out.println(method + " is not a method, exiting");
+				System.exit(1);
+		}
+
+		System.out.println(args[0] + " " + args[1]);
 	}
-	
+
 	private static void readFile(String fileName) {
 		try {
 			// Set up file reader
@@ -22,17 +43,17 @@ public class Main {
 			String line = null;
 			while ((line = file.readLine()) != null) {
 				switch (line) {
-					case "TELL":
-						// Set knowledge base
-						parseTellCommand(file.readLine());
-						break;
-					case "ASK":
-						// Set Query
-						System.out.println(file.readLine());
-						break;
-					default:
-						System.out.println("Invalid command: " + line);
-						System.exit(1);
+				case "TELL":
+					// Set knowledge base
+					parseTellCommand(file.readLine());
+					break;
+				case "ASK":
+					// Set Query
+					query = file.readLine();
+					break;
+				default:
+					System.out.println("Invalid command: " + line);
+					System.exit(1);
 				}
 			}
 
@@ -46,12 +67,22 @@ public class Main {
 			System.exit(1);
 		}
 	}
-	
+
 	private static void parseTellCommand(String line) {
 		// Remove any spaces and split commands at each semi-colon
-		String[] knowledgeBase = line.replaceAll("\\s", "").split(";");
-		for (int i = 0; i < knowledgeBase.length; i++) {
-			System.out.println(knowledgeBase[i]);
+		// Assign KB to Agent
+		String[] kb = line.replaceAll("\\s", "").split(";");
+		for (int i = 0; i < kb.length; i++) {
+			knowledgeBase.add(kb[i]);
+		}
+		// Extract Symbols
+		String[] allSymbols = line.replaceAll("\\s", "").split(";|=>|&");
+		for (int i = 0; i < allSymbols.length; i++) {
+			// Check that Symbol is unique
+			if (!symbols.contains(allSymbols[i])) {
+				// Assign Unique Symbol to Agent
+				symbols.add(allSymbols[i]);
+			}
 		}
 	}
 }
