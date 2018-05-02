@@ -22,5 +22,26 @@ public class TruthTable extends Method {
 		}
 	}
 	
+	public boolean checkSentence(String sentence, boolean[] tableRow) {
+		String[] sentenceSymbols = getSentenceSymbols(sentence);
+		String[] sentenceOperators = getSentenceOperators(sentence);
+		
+		int[] symbolIndexes = new int[sentenceSymbols.length];
+		for (int i = 0; i < sentenceSymbols.length; i++) {
+			symbolIndexes[i] = symbols.indexOf(sentenceSymbols[i]);
+		}
+		for (int i = 0; i < sentenceOperators.length; i++) {
+			switch(sentenceOperators[i]) {
+				case "=>": {
+					
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void check() {
+
+	}
 	
 }

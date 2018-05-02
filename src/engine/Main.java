@@ -32,7 +32,8 @@ public class Main {
 		}
 
 		System.out.println(args[0] + " " + args[1]);
-	}
+		thisMethod.check();
+		}
 
 	private static void readFile(String fileName) {
 		try {
