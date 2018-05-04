@@ -15,14 +15,15 @@ public abstract class Method {
 	public abstract void check();
 	
 	public String[] getSentenceOperators(String sentence) {
-		System.out.println("Sentence: " + sentence);
-		String[] sentenceSymbols = sentence.split(";|=>|&");
-		if (sentenceSymbols.length < 1) {
+		// Get sentence Symbols
+		String[] sentenceSymbols = getSentenceSymbols(sentence);
+		if (sentenceSymbols.length <= 1) {
+			// No operator for single symbol sentences
 			return null;
 		}
 		// strip symbols to extract operator
-		String temp = sentence.replace(sentenceSymbols[0], " ");
-		// remove leading space
+		String temp = sentence.replaceFirst(sentenceSymbols[0], "");
+		// remove any spaces
 		temp = temp.replaceAll("\\s", "");
 		for (int i = 1; i < sentenceSymbols.length; i++) {
 			temp = temp.replace(sentenceSymbols[i],  " ");
@@ -32,7 +33,7 @@ public abstract class Method {
 	}
 	
 	public String[] getSentenceSymbols(String sentence) {
-		System.out.println("Sentence: " + sentence);
+		// Split by Horn Cause operators
 		return sentence.split(";|=>|&");
 	}
 }

@@ -76,7 +76,7 @@ public class Main {
 		for (int i = 0; i < kb.length; i++) {
 			knowledgeBase.add(kb[i]);
 		}
-		// Extract Symbols
+		// Extract Symbols by removing any spaces and splitting by Horn Clause Operators
 		String[] allSymbols = line.replaceAll("\\s", "").split(";|=>|&");
 		for (int i = 0; i < allSymbols.length; i++) {
 			// Check that Symbol is unique
