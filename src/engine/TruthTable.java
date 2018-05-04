@@ -26,16 +26,20 @@ public class TruthTable extends Method {
 
 	public boolean checkSentence(String sentence, boolean[] tableRow) {
 		String[] sentenceOperators = getSentenceOperators(sentence);
-		if (sentenceOperators == null) {
-			return true;
-		}
 		String[] sentenceSymbols = getSentenceSymbols(sentence);
+		
+		// If no operators
+		if (sentenceOperators == null) {
+			// just return value of symbol in tt
+			return tableRow[symbols.indexOf(sentenceSymbols[0])];
+		}
+		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		for (int i = 0; i < sentenceSymbols.length; i++) {
 			// Populate Map with Symbol and value in truth table
 			map.put(sentenceSymbols[i], tableRow[symbols.indexOf(sentenceSymbols[i])]);
 		}
-
+		
 		if (sentenceOperators.length == 1 && sentenceOperators[0].equals("=>")) {
 			if (!map.get(sentenceSymbols[0]) || map.get(sentenceSymbols[1])) {
 				// Sentence is entailed
@@ -75,8 +79,12 @@ public class TruthTable extends Method {
 	public void check() {
 		int numberEntailed = 0;
 		for (int i = 0; i < truthTable.length; i++) {
+			// Check TT against where KB is entailed
 			if (checkKB(truthTable[i])) {
-				numberEntailed++;
+				// Check if query is entailed in model
+				if (truthTable[i][symbols.indexOf(query)]) {
+					numberEntailed++;
+				}
 			}
 		}
 		System.out.println(numberEntailed);
