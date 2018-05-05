@@ -87,7 +87,8 @@ public class TruthTable extends Method {
 				}
 			}
 		}
-		System.out.println(numberEntailed);
+		String output = numberEntailed > 0 ? "YES: " + numberEntailed : "NO";
+		System.out.println(output);
 	}
 
 }

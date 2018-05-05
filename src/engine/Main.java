@@ -21,7 +21,8 @@ public class Main {
 		// Get method from first String
 		String method = args[0];
 		Method thisMethod = null;
-
+		
+		// Instantiate the appropriate method
 		switch (method.toUpperCase()) {
 			case "TT":
 				thisMethod = new TruthTable(knowledgeBase, symbols, query);
@@ -31,7 +32,6 @@ public class Main {
 				System.exit(1);
 		}
 
-		System.out.println(args[0] + " " + args[1]);
 		thisMethod.check();
 		}
 
