@@ -27,6 +27,9 @@ public class Main {
 			case "TT":
 				thisMethod = new TruthTable(knowledgeBase, symbols, query);
 				break;
+			case "FC":
+				thisMethod = new ForwardChaining(knowledgeBase, symbols, query);
+				break;
 			default:
 				System.out.println(method + " is not a method, exiting");
 				System.exit(1);
