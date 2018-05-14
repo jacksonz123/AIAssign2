@@ -30,6 +30,9 @@ public class Main {
 			case "FC":
 				thisMethod = new ForwardChaining(knowledgeBase, symbols, query);
 				break;
+			case "BC":
+				thisMethod = new BackwardChaining(knowledgeBase, symbols, query);
+				break;
 			default:
 				System.out.println(method + " is not a method, exiting");
 				System.exit(1);
