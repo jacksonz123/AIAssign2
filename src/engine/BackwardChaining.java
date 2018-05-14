@@ -39,7 +39,7 @@ public class BackwardChaining extends Method {
 			}
 		}
 		if (entailed.size() > 1) {
-			System.out.println("YES: ");
+			System.out.print("YES: ");
 			for (int i = 0; i < entailed.size() - 1; i++) {
 				System.out.print(entailed.get(i) + ", ");
 			}
