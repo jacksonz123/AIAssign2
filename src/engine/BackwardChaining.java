@@ -11,6 +11,14 @@ public class BackwardChaining extends Method {
 	}
 
 	public void check() {
+		// Check that KB is in Horn Form
+		for (int i = 0; i < knowledgeBase.size(); i++) {
+			if (!checkHornForm(knowledgeBase.get(i))) {
+				System.out.println("Invalid Input, ensure in Horn Form");
+				System.exit(1);
+			}
+		}
+
 		// Initialization
 		ArrayList<String> agenda = new ArrayList<String>();
 		ArrayList<String> entailed = new ArrayList<String>();

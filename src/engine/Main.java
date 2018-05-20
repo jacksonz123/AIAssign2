@@ -21,25 +21,25 @@ public class Main {
 		// Get method from first String
 		String method = args[0];
 		Method thisMethod = null;
-		
+
 		// Instantiate the appropriate method
 		switch (method.toUpperCase()) {
-			case "TT":
-				thisMethod = new TruthTable(knowledgeBase, symbols, query);
-				break;
-			case "FC":
-				thisMethod = new ForwardChaining(knowledgeBase, symbols, query);
-				break;
-			case "BC":
-				thisMethod = new BackwardChaining(knowledgeBase, symbols, query);
-				break;
-			default:
-				System.out.println(method + " is not a method, exiting");
-				System.exit(1);
+		case "TT":
+			thisMethod = new TruthTable(knowledgeBase, symbols, query);
+			break;
+		case "FC":
+			thisMethod = new ForwardChaining(knowledgeBase, symbols, query);
+			break;
+		case "BC":
+			thisMethod = new BackwardChaining(knowledgeBase, symbols, query);
+			break;
+		default:
+			System.out.println(method + " is not a method, exiting");
+			System.exit(1);
 		}
 
 		thisMethod.check();
-		}
+	}
 
 	private static void readFile(String fileName) {
 		try {

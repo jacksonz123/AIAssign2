@@ -61,7 +61,22 @@ ASK
 p7
 
 * test7.txt
+TELL
+a&b&c=>d; a&b=>c; a; b;
+ASK
+d
 
+* test8.txt
+TELL
+a; b;
+ASK
+c;
+
+* test9.txt
+TELL
+c=>d&b; d;
+ASK
+b
 
 ===ACKNOWLEDGES/RESOURCES===
 - Generating Truth Tables: Helped my understanding of initialising a TT in java

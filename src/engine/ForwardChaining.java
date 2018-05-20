@@ -43,6 +43,13 @@ public class ForwardChaining extends Method {
 	}
 
 	public void check() {
+		// Check that KB is in Horn Form
+		for (int i = 0; i < knowledgeBase.size(); i++) {
+			if (!checkHornForm(knowledgeBase.get(i))) {
+				System.out.println("Invalid Input, ensure in Horn Form");
+				System.exit(1);
+			}
+		}
 		// Map of index of sentence in KB and count of premises in sentences
 		Map<Integer, Integer> table = new HashMap<Integer, Integer>(getInitialCountTable());
 		ArrayList<String> inferred = new ArrayList<String>();
@@ -67,8 +74,11 @@ public class ForwardChaining extends Method {
 						// do nothing, this is for already inferred symbols
 					} else if (table.get(i) == 1) {
 						table.put(i, table.get(i) - 1);
-						// Add the last symbol in sentence to agenda as its premise count is now 0
-						agenda.add(sentenceSymbols[sentenceSymbols.length - 1]);
+						// Check if not already inferred
+						if (!inferred.contains(sentenceSymbols[sentenceSymbols.length - 1])) {
+							// Add the last symbol in sentence to agenda as its premise count is now 0
+							agenda.add(sentenceSymbols[sentenceSymbols.length - 1]);
+						}
 					} else {
 						table.put(i, table.get(i) - 1);
 					}

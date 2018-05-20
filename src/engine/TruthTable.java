@@ -83,6 +83,10 @@ public class TruthTable extends Method {
 	}
 
 	public void check() {
+		if (!symbols.contains(query)) {
+			System.out.println("NO");
+			return;
+		}
 		int numberEntailed = 0;
 		for (int i = 0; i < truthTable.length; i++) {
 			// Check TT against where KB is entailed
