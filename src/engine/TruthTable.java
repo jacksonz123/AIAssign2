@@ -39,24 +39,30 @@ public class TruthTable extends Method {
 			// Populate Map with Symbol and value in truth table
 			map.put(sentenceSymbols[i], tableRow[symbols.indexOf(sentenceSymbols[i])]);
 		}
-		
+		// Check what form the sentence is in
 		if (sentenceOperators.length == 1 && sentenceOperators[0].equals("=>")) {
-			if (!map.get(sentenceSymbols[0]) || map.get(sentenceSymbols[1])) {
-				// Sentence is entailed
-				return true;
-			} else {
-				// Sentence is not entailed
-				return false;
+			// get value of symbols and return
+			return !map.get(sentenceSymbols[0]) || map.get(sentenceSymbols[1]);
+			
+		} else if (sentenceSymbols.length > 2 && sentenceOperators[0].equals("&") && sentenceOperators[sentenceOperators.length - 1].equals("=>")) {
+			// build results
+			boolean result = true;
+			for (int i = 0; i < sentenceSymbols.length - 1; i++) {
+				// check that sentence is in correct form
+				if (sentenceOperators[i].equals("&")) {
+					// build the result by anding each symbol
+					result = result && map.get(sentenceSymbols[i]);
+				}
+				else if (i == sentenceSymbols.length - 2 && sentenceOperators[i].equals("=>")) {
+					result = result && map.get(sentenceSymbols[i]);
+				}
+				else {
+					System.out.println("Invalid Input, ensure in Horn Form");
+					System.exit(1);
+				}
 			}
-		} else if (sentenceOperators.length == 2 && sentenceOperators[0].equals("&")
-				&& sentenceOperators[1].equals("=>")) {
-			if (!(map.get(sentenceSymbols[0]) && map.get(sentenceSymbols[1])) || map.get(sentenceSymbols[2])) {
-				// Sentence is entailed
-				return true;
-			} else {
-				// Sentence is not entailed
-				return false;
-			}
+			return !result || map.get(sentenceSymbols[sentenceSymbols.length - 1]);
+
 		} else {
 			System.out.println("Invalid Input, ensure in Horn Form");
 			System.exit(1);

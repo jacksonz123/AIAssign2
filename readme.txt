@@ -54,6 +54,14 @@ a=>b; a
 ASK
 b
 
+* test6.txt
+TELL
+p1&p2&p3=> p4; p5&p6 => p4; p1 => p2; p1&p2 => p3; p5&p7 => p6; p1; p4;
+ASK
+p7
+
+* test7.txt
+
 
 ===ACKNOWLEDGES/RESOURCES===
 - Generating Truth Tables: Helped my understanding of initialising a TT in java
