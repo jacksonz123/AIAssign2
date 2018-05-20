@@ -23,12 +23,14 @@ public class BackwardChaining extends Method {
 			String s = agenda.remove(agenda.size() - 1);
 			// add to entailed
 			entailed.add(s);
-			
+
 			for (int i = 0; i < knowledgeBase.size(); i++) {
 				String[] sentenceSymbols = getSentenceSymbols(knowledgeBase.get(i));
+				// check that sentence is not fact
 				if (sentenceSymbols.length > 1) {
 					// if symbol is conclusion of sentence
 					if (sentenceSymbols[sentenceSymbols.length - 1].equals(s)) {
+						// add each symbol in sentence to agenda
 						for (int j = 0; j < sentenceSymbols.length - 1; j++) {
 							if (!agenda.contains(sentenceSymbols[j])) {
 								agenda.add(sentenceSymbols[j]);
@@ -44,8 +46,7 @@ public class BackwardChaining extends Method {
 				System.out.print(entailed.get(i) + ", ");
 			}
 			System.out.println(entailed.get(entailed.size() - 1));
-		}
-		else {
+		} else {
 			System.out.println("NO");
 		}
 	}
